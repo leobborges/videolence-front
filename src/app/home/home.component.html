@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row justify-content-center home__content">
+    <button type="button" class="col-6 btn btn-dark" (click)="onClick()">Classificar</button>
+  </div>
+  <div *ngIf="response" class="row justify-content-center">
+    <div class="col-12 text-center">{{response.block_time}}</div>
+    <div class="col-12 text-center">{{response.predict_time}}</div>
+    <div class="col-12 text-center">{{response.video_duration}}</div>
+    <div class="col-12" *ngFor="let predict of response.predictions">
+      <div class="col-12 text-center">{{predict.block_time_start}} - {{predict.keyword}}</div>
+    </div>
+  </div>
+</div>

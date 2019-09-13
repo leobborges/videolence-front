@@ -1,0 +1,10 @@
+.header {
+  &__content {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #000000;
+    color: white;
+    font-weight: 600;
+  } 
+}

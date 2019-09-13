@@ -1,0 +1,5 @@
+{
+  "predictUrl": "/predict",
+  "loginUrl": "/login",
+  "videoFile": "nv2.avi"
+}
