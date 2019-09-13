@@ -9,16 +9,18 @@ import { ConfigService } from 'src/services/config.service';
 })
 export class HomeComponent implements OnInit {
   public response: any;
-  constructor(private configService: ConfigService) {
-  }
+  public isLoading = false;
+
+  constructor(private configService: ConfigService) {}
 
   ngOnInit() {
   }
 
   onClick() {
+    this.isLoading = true;
     this.configService.postConfig()
     .subscribe(response => {
-      console.log(response)
+      this.isLoading = false;
       this.response = response;
     });
   }
