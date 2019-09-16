@@ -3,11 +3,36 @@
     padding: 16px;
   }
 
-  &__loading {
-    display: block;
-    position: fixed;
-    z-index: 1031;
-    top: 50%;
-    right: 50%;
+  &__image {
+    height: 295px;
+    width: 295px;
+  }
+
+  &__time {
+    border-bottom: 1px #343a40 solid;
+
+    &:last-child {
+      margin-bottom: 24px;
+    }
+  }
+
+  &__response-content {
+    margin-bottom: 8px;
+    border-radius: 4px;
+    padding: 8px;
+    background-color: #343a40;
+    color: white;
+
+    &:first-child {
+      margin-top: 24px;
+    }
+
+    &:last-child {
+      margin-bottom: 24px;
+    }
+
+    &__up {
+      border-bottom: 1px white solid;
+    }
   }
 }

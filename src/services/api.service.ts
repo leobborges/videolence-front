@@ -5,16 +5,12 @@ import { Observable } from 'rxjs/internal/Observable';
 import PredictModelResponse from 'src/models/PredictModelResponse';
 
 @Injectable()
-export class ConfigService {
+export class ApiService {
   constructor(private http: HttpClient) { }
 
-  configUrl = 'http://localhost:5000/predict';
+  configUrl = 'http://localhost:5000/';
 
-  bodyRequest = {
-    video: "nv2.avi"
-  }
-
-  postConfig(): Observable<PredictModelResponse> {
+  post(body: any, path?: string): Observable<PredictModelResponse> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -22,6 +18,8 @@ export class ConfigService {
       })
     };
 
-    return this.http.post<PredictModelResponse>(this.configUrl, this.bodyRequest, httpOptions);
+    this.configUrl = this.configUrl + path;
+
+    return this.http.post<PredictModelResponse>(this.configUrl, body, httpOptions);
   }
 }

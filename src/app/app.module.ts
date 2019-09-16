@@ -7,7 +7,8 @@ import { AlertModule } from 'ngx-bootstrap';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
-import { ConfigService } from 'src/services/config.service';
+import { ApiService } from 'src/services/api.service';
+import { PredictionService } from 'src/services/prediction.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ConfigService } from 'src/services/config.service';
     AlertModule.forRoot(),
   ],
   providers: [
-    ConfigService
+    ApiService,
+    PredictionService
   ],
   bootstrap: [AppComponent]
 })

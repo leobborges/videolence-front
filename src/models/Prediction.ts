@@ -1,5 +1,5 @@
 export default class Prediction {
-  keyword: string;
+  public keyword: string;
 
-  block_time_start: number;
+  public block_time_start: number;
 }

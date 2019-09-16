@@ -1,19 +1,36 @@
-<div class="container">
+<div class="container home__content">
+  <div class="row justify-content-center">
+    <img src="./../../assets/images/logo.png" class="home__image">
+  </div>
   <div *ngIf="!isLoading">
     <div *ngIf="response" class="row justify-content-center">
-      <div class="col-12 text-center">{{response.block_time}}</div>
-      <div class="col-12 text-center">{{response.predict_time}}</div>
-      <div class="col-12 text-center">{{response.video_duration}}</div>
-      <div class="col-12" *ngFor="let predict of response.predictions">
-        <div class="col-12 text-center">{{predict.block_time_start}} - {{predict.keyword}}</div>
+      <div class="col-7 align-self-center text-center home__time">Tempo da Análise: {{response.predict_time}} segundos</div>
+      <div class="col-7 align-self-center text-center home__time">Tempo do Vídeo: {{response.video_duration}} segundos</div>
+      <div class="col-7 align-self-center">
+        <div class="home__response-content"  *ngFor="let predict of response.predictions">
+          <div class="col-12 text-center home__response-content__up">{{predict.analysis_start}} - {{predict.analysis_end}} segundos</div>
+          <div class="col-12 text-center">{{predict.type}}</div>
+        </div>
       </div>
+      <!-- <div>
+        <video width="320" height="240" controls>
+          <source [src]="videoSelected" [type]="videoSelectedFormat">
+        </video>
+      </div> -->
     </div>
-    <div class="row justify-content-center home__content">
-      <button type="button" class="col-6 btn btn-dark" (click)="onClick()">Classificar</button>
+    <div class="row justify-content-center">
+      <input type="file" id="inputFile" class="col-10 btn btn-dark" accept=".avi, .mp4" (change)="onFileChange($event)"/>
+    </div>
+    <div *ngIf="videoIsSelected">
+        <div class="row justify-content-center home__content">
+          <button type="button" class="col-6 btn btn-dark" (click)="onClick()">Classificar</button>
+        </div>
     </div>
   </div>
 
-  <div *ngIf="isLoading" class="spinner-border home__loading" role="status">
-    <span class="sr-only">Loading...</span>
+  <div *ngIf="isLoading" class="row justify-content-center">
+    <div class="spinner-border">
+      <span class="sr-only">Loading...</span>
+    </div>
   </div>
 </div>
