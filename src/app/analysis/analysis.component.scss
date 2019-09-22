@@ -1,9 +1,13 @@
-.home {
+.home {  
   &__content {
     padding: 16px;
   }
 
   &__file-selector {
+    input[type='file'] {
+      display: none
+    }
+    
     &:hover {
       cursor: pointer;
     }

@@ -6,11 +6,11 @@ import PredictionViewModel from 'src/models/PrediticionViewModel';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'Home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'Analysis',
+  templateUrl: './analysis.component.html',
+  styleUrls: ['./analysis.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class AnalysisComponent implements OnInit {
   public response: PredictViewModel;
   public summaryResponse: PredictionViewModel[];
   public isLoading = false;

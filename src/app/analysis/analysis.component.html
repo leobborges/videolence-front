@@ -47,12 +47,19 @@
 
     <div *ngIf="!response" class="row justify-content-center">
       <div class="col-12 align-self-center text-center home__content">Selecione abaixo o vídeo para a análise:</div>
-      <input type="file" id="myFile" class="col-6 btn btn-dark home__file-selector" accept=".avi, .mp4" (change)="onFileChange($event)"/>
+      <label class="col-6 btn btn-dark home__file-selector">
+        <span *ngIf="!videoIsSelected">
+          Escolher arquivo
+        </span>
+        <span *ngIf="videoIsSelected">
+          Arquivo Selecionado:
+          <br>
+          <i class="fa fa-file-video-o"></i>
+          {{videoSelected}}
+        </span>
+        <input type="file" id="myFile" accept=".avi, .mp4" (change)="onFileChange($event)"/>
+      </label>
     </div>
-
-    <!-- <video class="align-self-center home__video" controls autoplay>
-      <source [src]="fileURL" type="video/mp4">
-    </video> -->
     
     <div *ngIf="videoIsSelected">
         <div class="row justify-content-center home__content">
