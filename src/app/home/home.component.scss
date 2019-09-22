@@ -3,16 +3,37 @@
     padding: 16px;
   }
 
+  &__file-selector {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
   &__image {
     height: 295px;
     width: 295px;
   }
 
-  &__time {
+  &__video {
+    width: 100%;
+  }
+
+  &__block-response {
     border-bottom: 1px #343a40 solid;
 
     &:last-child {
       margin-bottom: 24px;
+    }
+
+    &__more-details {
+      &__icon {
+        padding-left: 8px;
+        animation: fadein 1s linear;
+  
+        &:hover {
+          cursor: pointer;
+        }
+      }
     }
   }
 
@@ -20,8 +41,10 @@
     margin-bottom: 8px;
     border-radius: 4px;
     padding: 8px;
-    background-color: #343a40;
+    background-color: #69695F;
     color: white;
+
+    animation: fadein 1s linear;
 
     &:first-child {
       margin-top: 24px;
@@ -35,4 +58,14 @@
       border-bottom: 1px white solid;
     }
   }
+}
+
+@keyframes fadein {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeout {
+  from {opacity: 1;}
+  to {opacity: 0;}
 }

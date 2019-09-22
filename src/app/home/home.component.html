@@ -4,23 +4,56 @@
   </div>
   <div *ngIf="!isLoading">
     <div *ngIf="response" class="row justify-content-center">
-      <div class="col-7 align-self-center text-center home__time">Tempo da Análise: {{response.predict_time}} segundos</div>
-      <div class="col-7 align-self-center text-center home__time">Tempo do Vídeo: {{response.video_duration}} segundos</div>
-      <div class="col-7 align-self-center">
-        <div class="home__response-content"  *ngFor="let predict of response.predictions">
-          <div class="col-12 text-center home__response-content__up">{{predict.analysis_start}} - {{predict.analysis_end}} segundos</div>
-          <div class="col-12 text-center">{{predict.type}}</div>
+      <div class="col-7 align-self-center text-center home__block-response">Tempo da Análise: {{response.predict_time}} segundos</div>
+      <div class="col-7 align-self-center text-center home__block-response">Tempo do Vídeo: {{response.video_duration}} segundos</div>
+
+      <!-- Seção do Resumo da Análise -->
+      <div class="col-7 align-self-center text-center home__block-response">
+        <div *ngIf="summaryResponse.length > 0">
+          Este vídeo <strong>pode</strong> conter conteúdo violento nos trechos de:
+          <div *ngFor="let summary of summaryResponse">
+            {{summary.analysis_start}} - {{summary.analysis_end}} segundos
+          </div>
+        </div>
+        <div *ngIf="summaryResponse.length === 0">
+          Este vídeo não possui conteúdo violento.
         </div>
       </div>
-      <!-- <div>
-        <video width="320" height="240" controls>
-          <source [src]="videoSelected" [type]="videoSelectedFormat">
+
+      <!-- Seção dos Detalhes da Análise -->
+      <div class="col-7 align-self-center text-center home__content">
+        <button class="col-7 btn btn-dark home__block-response__more-details" (click)="showOrHideDetails()">
+          Mais detalhes
+          <i *ngIf="!showAnalysisDetails" class="fa fa-angle-down home__block-response__more-details__icon"></i>
+          <i *ngIf="showAnalysisDetails" class="fa fa-angle-up home__block-response__more-details__icon"></i>
+        </button>
+        <div *ngIf="showAnalysisDetails">
+          <div class="home__response-content"  *ngFor="let predict of response.predictions">
+            <div class="col-12 text-center home__response-content__up">{{predict.analysis_start}} - {{predict.analysis_end}} segundos</div>
+            <div class="col-12 text-center">{{predict.type}}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seção do Vídeo -->
+      <div class="col-7 home__content">
+        <video class="align-self-center home__video" [src]="fileURL" controls autoplay>
+          <source [src]="fileURL" type="video/mp4">
         </video>
-      </div> -->
+      </div>
+
+      <button type="button" class="col-7 btn btn-dark" (click)="reset()">Classificar outro vídeo</button>
     </div>
-    <div class="row justify-content-center">
-      <input type="file" id="inputFile" class="col-10 btn btn-dark" accept=".avi, .mp4" (change)="onFileChange($event)"/>
+
+    <div *ngIf="!response" class="row justify-content-center">
+      <div class="col-12 align-self-center text-center home__content">Selecione abaixo o vídeo para a análise:</div>
+      <input type="file" id="myFile" class="col-6 btn btn-dark home__file-selector" accept=".avi, .mp4" (change)="onFileChange($event)"/>
     </div>
+
+    <!-- <video class="align-self-center home__video" controls autoplay>
+      <source [src]="fileURL" type="video/mp4">
+    </video> -->
+    
     <div *ngIf="videoIsSelected">
         <div class="row justify-content-center home__content">
           <button type="button" class="col-6 btn btn-dark" (click)="onClick()">Classificar</button>

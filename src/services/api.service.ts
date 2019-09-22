@@ -18,8 +18,6 @@ export class ApiService {
       })
     };
 
-    this.configUrl = this.configUrl + path;
-
-    return this.http.post<PredictModelResponse>(this.configUrl, body, httpOptions);
+    return this.http.post<PredictModelResponse>(`${this.configUrl}${path}`, body, httpOptions);
   }
 }
