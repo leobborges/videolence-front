@@ -1,0 +1,33 @@
+<div class="container login__content">
+  <div class="row justify-content-center">
+    <img src="./../../assets/images/logo.png" class="login__image">
+  </div>
+
+  <div *ngIf="!isLoading && formLoginError" class="row justify-content-center">
+    <div class="col-7 text-center login__inline-error">
+      Login e/ou senha inválidos.
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading" class="row justify-content-center">
+    <form class="col-7 align-self-center login__form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <input
+          [className]="!formLoginError ? 'login__form__input' : 'login__form__input login__form__input--error'"
+          type="text" placeholder="Login" formControlName="login" required
+        >
+
+        <input
+          [className]="!formLoginError ? 'login__form__input' : 'login__form__input login__form__input--error'"
+          type="password" placeholder="Senha" formControlName="password" required
+        >
+
+        <button type="submit" class="btn btn-dark align-self-center login__button" [disabled]="!loginForm.valid">Entrar</button>
+    </form>
+  </div>
+
+  <div *ngIf="isLoading" class="row justify-content-center">
+    <div class="spinner-border">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</div>

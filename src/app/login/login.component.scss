@@ -1,0 +1,41 @@
+.login {  
+  &__content {
+    padding: 16px;
+  }
+
+  &__inline-error {
+    margin: 24px 0;
+    padding: 4px 0;
+    background-color: red;
+    border: 1px red solid;
+    border-radius: 4px;
+    color: white;
+  }
+
+  &__image {
+    height: 295px;
+    width: 295px;
+  }
+
+  &__form {
+    padding: 0;
+
+    &__input {
+      width: 100%;
+      margin-bottom: 8px;
+      border: 1px #343a40 solid;
+      color: #343a40;
+      border-radius: 4px;
+      padding-left: 8px;
+
+      &--error {
+        border: 1px red solid;
+        color: red;
+      }
+    }
+  }
+
+  &__button {
+    width: 100%;
+  }
+}

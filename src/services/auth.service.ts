@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
-import PredictViewModel from 'src/models/prediction/PredictViewModel';
 import { ApiService } from './api.service';
+import LoginModel from 'src/models/auth/LoginModel';
 
 @Injectable()
-export class PredictionService {
+export class AuthService {
   constructor(public apiService: ApiService) { }
 
-  predict(filename: string): Promise<PredictViewModel> {
+  login(username: string, password: string): Promise<LoginModel> {
     const bodyRequest = {
-      video: filename
+      login: username,
+      password
     };
 
-    const urlPath = 'predict';
+    const urlPath = 'login';
 
     return new Promise((resolve, reject) => {
-      this.apiService.predict(
+      this.apiService.login(
         bodyRequest,
         urlPath,
-      ).then( response => {
-        resolve(PredictViewModel.prototype.fromClientModel(response));
+      ).then(response => {
+        resolve(LoginModel.prototype.fromClientModel(response));
       }).catch(error => {
         reject(error);
       });

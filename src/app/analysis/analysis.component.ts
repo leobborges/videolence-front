@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { PredictionService } from 'src/services/prediction.service';
-import PredictViewModel from 'src/models/PredictViewModel';
-import PredictionViewModel from 'src/models/PrediticionViewModel';
+import PredictViewModel from 'src/models/prediction/PredictViewModel';
+import PredictionViewModel from 'src/models/prediction/PrediticionViewModel';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -47,7 +47,7 @@ export class AnalysisComponent implements OnInit {
     const files = event.target.files;
     const file = files[0];
 
-    var URL = window.URL;
+    const URL = window.URL;
 
     if(files && files.length) {
       this.videoSelectedFormat = file.type;

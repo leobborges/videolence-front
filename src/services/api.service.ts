@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/internal/Observable';
-import PredictModelResponse from 'src/models/PredictModelResponse';
+import PredictModelResponse from 'src/models/prediction/PredictModelResponse';
+import LoginModelResponse from 'src/models/auth/LoginModelResponse';
 
 @Injectable()
 export class ApiService {
@@ -10,14 +10,32 @@ export class ApiService {
 
   configUrl = 'http://localhost:5000/';
 
-  post(body: any, path?: string): Observable<PredictModelResponse> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Access-Control-Allow-Origin': '*'
-      })
-    };
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      'Access-Control-Allow-Origin': '*'
+    })
+  };
 
-    return this.http.post<PredictModelResponse>(`${this.configUrl}${path}`, body, httpOptions);
+  private post<T>(body: any, path?: string) {
+    return new Promise<T>((resolve, reject) => {
+      this.http.post(
+        `${this.configUrl}${path}`,
+        body,
+        this.httpOptions,
+      ).toPromise().then(response => {
+        resolve(response);
+      }).catch(error => {
+        reject(error);
+      });
+    });
+  }
+
+  public login(body: any, path?: string): Promise<LoginModelResponse> {
+    return this.post<LoginModelResponse>(body, path);
+  }
+
+  public predict(body: any, path?: string): Promise<PredictModelResponse> {
+    return this.post<PredictModelResponse>(body, path);
   }
 }

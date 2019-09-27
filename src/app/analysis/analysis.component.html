@@ -1,14 +1,15 @@
-<div class="container home__content">
+<Header></Header>
+<div class="container analysis__content">
   <div class="row justify-content-center">
-    <img src="./../../assets/images/logo.png" class="home__image">
+    <img src="./../../assets/images/logo.png" class="analysis__image">
   </div>
   <div *ngIf="!isLoading">
     <div *ngIf="response" class="row justify-content-center">
-      <div class="col-7 align-self-center text-center home__block-response">Tempo da Análise: {{response.predict_time}} segundos</div>
-      <div class="col-7 align-self-center text-center home__block-response">Tempo do Vídeo: {{response.video_duration}} segundos</div>
+      <div class="col-7 align-self-center text-center analysis__block-response">Tempo da Análise: {{response.predict_time}} segundos</div>
+      <div class="col-7 align-self-center text-center analysis__block-response">Tempo do Vídeo: {{response.video_duration}} segundos</div>
 
       <!-- Seção do Resumo da Análise -->
-      <div class="col-7 align-self-center text-center home__block-response">
+      <div class="col-7 align-self-center text-center analysis__block-response">
         <div *ngIf="summaryResponse.length > 0">
           Este vídeo <strong>pode</strong> conter conteúdo violento nos trechos de:
           <div *ngFor="let summary of summaryResponse">
@@ -21,23 +22,23 @@
       </div>
 
       <!-- Seção dos Detalhes da Análise -->
-      <div class="col-7 align-self-center text-center home__content">
-        <button class="col-7 btn btn-dark home__block-response__more-details" (click)="showOrHideDetails()">
+      <div class="col-7 align-self-center text-center analysis__content">
+        <button class="col-7 btn btn-dark analysis__block-response__more-details" (click)="showOrHideDetails()">
           Mais detalhes
-          <i *ngIf="!showAnalysisDetails" class="fa fa-angle-down home__block-response__more-details__icon"></i>
-          <i *ngIf="showAnalysisDetails" class="fa fa-angle-up home__block-response__more-details__icon"></i>
+          <i *ngIf="!showAnalysisDetails" class="fa fa-angle-down analysis__block-response__more-details__icon"></i>
+          <i *ngIf="showAnalysisDetails" class="fa fa-angle-up analysis__block-response__more-details__icon"></i>
         </button>
         <div *ngIf="showAnalysisDetails">
-          <div class="home__response-content"  *ngFor="let predict of response.predictions">
-            <div class="col-12 text-center home__response-content__up">{{predict.analysis_start}} - {{predict.analysis_end}} segundos</div>
+          <div class="analysis__response-content"  *ngFor="let predict of response.predictions">
+            <div class="col-12 text-center analysis__response-content__up">{{predict.analysis_start}} - {{predict.analysis_end}} segundos</div>
             <div class="col-12 text-center">{{predict.type}}</div>
           </div>
         </div>
       </div>
 
       <!-- Seção do Vídeo -->
-      <div class="col-7 home__content">
-        <video class="align-self-center home__video" [src]="fileURL" controls autoplay>
+      <div class="col-7 analysis__content">
+        <video class="align-self-center analysis__video" [src]="fileURL" controls autoplay>
           <source [src]="fileURL" type="video/mp4">
         </video>
       </div>
@@ -46,8 +47,8 @@
     </div>
 
     <div *ngIf="!response" class="row justify-content-center">
-      <div class="col-12 align-self-center text-center home__content">Selecione abaixo o vídeo para a análise:</div>
-      <label class="col-6 btn btn-dark home__file-selector">
+      <div class="col-12 align-self-center text-center analysis__content">Selecione abaixo o vídeo para a análise:</div>
+      <label class="col-6 btn btn-dark analysis__file-selector">
         <span *ngIf="!videoIsSelected">
           Escolher arquivo
         </span>
@@ -62,7 +63,7 @@
     </div>
     
     <div *ngIf="videoIsSelected">
-        <div class="row justify-content-center home__content">
+        <div class="row justify-content-center analysis__content">
           <button type="button" class="col-6 btn btn-dark" (click)="onClick()">Classificar</button>
         </div>
     </div>
