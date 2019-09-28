@@ -1,10 +1,30 @@
 .header {
   &__content {
     height: 60px;
-    display: flex;
-    align-items: center;
     background-color: #343a40;
     color: white;
     font-weight: 600;
-  } 
+    margin: 0;
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+  }
+
+  &__logout {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: right;
+    padding-right: 16px;
+
+    &__text {
+      &:hover {
+        border-bottom: 1px solid white;
+        cursor: pointer;
+      }
+    }
+  }
 }

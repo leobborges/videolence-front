@@ -1,3 +1,12 @@
-<div class="header__content">
-  
+<div class="row header__content">
+  <div class="col-6 header__user">
+    Bem vindo {{user}}
+  </div>
+
+  <!-- ícone para logout -->
+  <div class="col-6 header__logout">
+    <div class="header__logout__text" (click)="logout()">
+      Logout
+    </div>
+  </div>
 </div>

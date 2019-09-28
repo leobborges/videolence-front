@@ -24,7 +24,7 @@ export class ApiService {
         body,
         this.httpOptions,
       ).toPromise().then(response => {
-        resolve(response);
+        resolve(<T> response);
       }).catch(error => {
         reject(error);
       });
