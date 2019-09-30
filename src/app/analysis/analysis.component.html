@@ -4,7 +4,7 @@
     <img src="./../../assets/images/logo.png" class="analysis__image">
   </div>
   <div *ngIf="!isLoading">
-    <div *ngIf="response" class="row justify-content-center">
+    <div *ngIf="response && !error" class="row justify-content-center">
       <div class="col-7 align-self-center text-center analysis__block-response">Tempo da Análise: {{response.predict_time}} segundos</div>
       <div class="col-7 align-self-center text-center analysis__block-response">Tempo do Vídeo: {{response.video_duration}} segundos</div>
 
@@ -38,15 +38,29 @@
 
       <!-- Seção do Vídeo -->
       <div class="col-7 analysis__content">
-        <video class="align-self-center analysis__video" [src]="fileURL" controls autoplay>
-          <source [src]="fileURL" type="video/mp4">
-        </video>
+        <div class="analysis__video">
+          <div *ngIf="!validTypeSelected" class="align-self-center analysis__video--invalid">
+            Extensão inválida para o player de vídeo.<br>
+            Extensões válidas para o player: mp4, webm e ogg.
+          </div>
+          <video *ngIf="validTypeSelected" class="align-self-center analysis__video__wrapper" [src]="fileURL" controls autoplay>
+            <source [src]="fileURL" type="video/mp4">
+          </video>
+        </div>
       </div>
 
       <button type="button" class="col-7 btn btn-dark" (click)="reset()">Classificar outro vídeo</button>
     </div>
 
-    <div *ngIf="!response" class="row justify-content-center">
+    <div *ngIf="!response && error" class="row justify-content-center">
+      <div class="col-7 text-center analysis__inline-error">
+        Ops! Aconteceu algum erro, tente novamente.
+      </div>
+
+      <button type="button" class="col-7 btn btn-dark" (click)="reset()">Classificar outro vídeo</button>
+    </div>
+
+    <div *ngIf="!response && !error" class="row justify-content-center">
       <div class="col-12 align-self-center text-center analysis__content">Selecione abaixo o vídeo para a análise:</div>
       <label class="col-6 btn btn-dark analysis__file-selector">
         <span *ngIf="!videoIsSelected">
@@ -62,7 +76,7 @@
       </label>
     </div>
     
-    <div *ngIf="videoIsSelected">
+    <div *ngIf="videoIsSelected && !error">
         <div class="row justify-content-center analysis__content">
           <button type="button" class="col-6 btn btn-dark" (click)="onClick()">Classificar</button>
         </div>

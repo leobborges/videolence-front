@@ -7,11 +7,11 @@ export default class PredictionViewModel {
 
   public type: string;
 
-  public analysis_start: number;
+  public analysis_start: string;
 
-  public analysis_end: number;
+  public analysis_end: string;
 
-  public fromClientArrayModel(model: Prediction[], size: number): PredictionViewModel[] {
+  public fromClientArrayModel(model: Prediction[], size: number, video_duration: number): PredictionViewModel[] {
     if (model === null || model === undefined || model.length === 0) {
       return null;
     }
@@ -19,8 +19,8 @@ export default class PredictionViewModel {
     return model.map(predict => {
       return {
         type: predict.keyword === "['non-violence']" ? 'Não violento' : 'Violento',
-        analysis_start: predict.block_time_start,
-        analysis_end: predict.block_time_start + size,
+        analysis_start: predict.block_time_start.toFixed(2),
+        analysis_end: (predict.block_time_start + size > video_duration) ? video_duration.toFixed(2) : (predict.block_time_start + size).toFixed(2),
       } as PredictionViewModel;
     });
   }

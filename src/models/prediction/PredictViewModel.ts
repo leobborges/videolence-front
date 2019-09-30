@@ -22,9 +22,9 @@ export default class PredictViewModel {
 
     return {
       block_time: model.block_time,
-      predict_time: model.predict_time.toPrecision(4),
-      video_duration: model.video_duration.toPrecision(4),
-      predictions: PredictionViewModel.prototype.fromClientArrayModel(model.predictions, model.block_time)
+      predict_time: model.predict_time.toString(),
+      video_duration: model.video_duration.toString(),
+      predictions: PredictionViewModel.prototype.fromClientArrayModel(model.predictions, model.block_time, model.video_duration)
     } as PredictViewModel;
   }
 }
